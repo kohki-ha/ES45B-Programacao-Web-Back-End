@@ -9,7 +9,7 @@ const usuarios = [
 
 
 // Parte 1
-console.log(`Total de compras por usuario:`)
+console.log(`Parte 1 - Total de compras por usuario:`)
 
 usuarios.forEach((usuario) => {
     total = 0;
@@ -24,7 +24,8 @@ usuarios.forEach((usuario) => {
 
 
 // Parte 2
-console.log(`\nUsuarios ativos:`)
+console.log(`\nParte 2 - Usuarios ativos:`)
+
 usuarios.forEach((usuario) => {
     if (usuario.ativo === true) {
         console.log(usuario.nome)
@@ -34,7 +35,8 @@ usuarios.forEach((usuario) => {
 
 
 // Parte 3
-console.log(`\nUsuarios com idade >= 18:`)
+console.log(`\nParte 3 - Usuarios com idade >= 18:`)
+
 usuarios.forEach((usuario) => {
     if (usuario.idade >= 18) {
         console.log(usuario.nome)
@@ -44,7 +46,7 @@ usuarios.forEach((usuario) => {
 
 
 // Parte 4
-console.log(`\nUsuario com maior volume de compras:`)
+console.log(`\nParte 4 - Usuario com maior volume de compras:`)
 
 let maiorTotal = 0
 let maiorComprador = ""
@@ -92,3 +94,106 @@ console.log(`Total: ${maiorTotal}`)
 // O resultado é `false` porque o operador === faz uma comparação estrita,
 // levando em consideração tanto o valor quanto o tipo.
 //
+
+
+// Parte 6
+console.log(`\nParte 6 - Desafio Arrow Function vs Function:`)
+
+const pessoaComFunction = {
+    nome: "Maria",
+    falar: function() {
+        console.log(this.nome)
+    }
+}
+
+pessoaComFunction.falar()
+
+const pessoaComArrow = {
+    nome: "Maria",
+    falar: () => {
+        console.log(this.nome)
+    }
+}
+
+pessoaComArrow.falar()
+
+// O Código 1 funciona corretamente porque a function possui seu próprio `this`.
+// O Código 2 não funciona como esperado porque a arrow function não possui seu próprio `this`.
+// Em arrow functions, o `this` é herdado do contexto onde a função foi criada.
+
+
+
+// Parte 7
+console.log(`\nParte 7 - Desafio Final:`)
+
+const gerarRelatorio = () => {
+    let usuariosAtivos = 0
+    let usuariosInativos = 0
+    let somaIdades = 0
+    let maiorTotalRelatorio = 0
+    let maiorCompradorRelatorio = ""
+
+    usuarios.forEach((usuario) => {
+        somaIdades = somaIdades + usuario.idade
+
+        if (usuario.ativo === true) {
+            usuariosAtivos = usuariosAtivos + 1
+        } else {
+            usuariosInativos = usuariosInativos + 1
+        }
+
+        total = 0
+
+        usuario.compras.forEach((compra) => {
+            total = total + compra
+        })
+
+        if (total > maiorTotalRelatorio) {
+            maiorTotalRelatorio = total
+            maiorCompradorRelatorio = usuario.nome
+        }
+    })
+
+    return {
+        totalUsuarios: usuarios.length,
+        usuariosAtivos: usuariosAtivos,
+        usuariosInativos: usuariosInativos,
+        mediaIdade: somaIdades / usuarios.length,
+        maiorComprador: maiorCompradorRelatorio
+    }
+}
+
+console.log(`Relatório:`)
+console.log(gerarRelatorio())
+
+
+
+// Desafio Extra
+console.log(`\nDesafio Extra:`)
+const gerarDesafioExtra = () => {
+    let usuarioMaisJovem = usuarios[0]
+    let usuarioMaisVelho = usuarios[0]
+    let totalCompras = 0
+
+    usuarios.forEach((usuario) => {
+        if (usuario.idade < usuarioMaisJovem.idade) {
+            usuarioMaisJovem = usuario
+        }
+
+        if (usuario.idade > usuarioMaisVelho.idade) {
+            usuarioMaisVelho = usuario
+        }
+
+        usuario.compras.forEach((compra) => {
+            totalCompras = totalCompras + compra
+        })
+    })
+
+    return {
+        usuarioMaisJovem: usuarioMaisJovem.nome,
+        usuarioMaisVelho: usuarioMaisVelho.nome,
+        mediaComprasPorUsuario: totalCompras / usuarios.length
+    }
+}
+
+console.log(gerarDesafioExtra())
