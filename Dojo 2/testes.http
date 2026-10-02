@@ -1,0 +1,107 @@
+### Variável com a URL base da API
+@baseUrl = http://localhost:3000
+
+
+# ============================================================
+# ROTAS GET (só verificam se a rota existe)
+# ============================================================
+
+### GET /adicao — deve retornar "Você está na rota adição"
+GET {{baseUrl}}/adicao
+
+### GET /subtracao — deve retornar "Você está na rota subtração!"
+GET {{baseUrl}}/subtracao
+
+### GET /multiplicacao — deve retornar "Você está na rota multiplicação!"
+GET {{baseUrl}}/multiplicacao
+
+### GET /divisao — deve retornar "Você está na rota divisão!"
+GET {{baseUrl}}/divisao
+
+
+# ============================================================
+# ROTAS POST (fazem o cálculo de verdade)
+# ============================================================
+
+### POST /adicao — 2 + 3 = 5
+POST {{baseUrl}}/adicao
+Content-Type: application/json
+
+{
+    "a": 2,
+    "b": 3
+}
+
+### POST /subtracao — 10 - 4 = 6
+POST {{baseUrl}}/subtracao
+Content-Type: application/json
+
+{
+    "a": 10,
+    "b": 4
+}
+
+### POST /multiplicacao — 6 * 7 = 42
+POST {{baseUrl}}/multiplicacao
+Content-Type: application/json
+
+{
+    "a": 6,
+    "b": 7
+}
+
+### POST /divisao — 20 / 4 = 5
+POST {{baseUrl}}/divisao
+Content-Type: application/json
+
+{
+    "a": 20,
+    "b": 4
+}
+
+
+# ============================================================
+# CASOS DE TESTE (situações especiais / de erro)
+# ============================================================
+
+### POST /divisao — divisão por zero (deve retornar a mensagem de erro)
+POST {{baseUrl}}/divisao
+Content-Type: application/json
+
+{
+    "a": 10,
+    "b": 0
+}
+
+### POST /adicao — números negativos — -5 + 3 = -2
+POST {{baseUrl}}/adicao
+Content-Type: application/json
+
+{
+    "a": -5,
+    "b": 3
+}
+
+### POST /adicao — números decimais — 1.5 + 2.5 = 4
+POST {{baseUrl}}/adicao
+Content-Type: application/json
+
+{
+    "a": 1.5,
+    "b": 2.5
+}
+
+### POST /adicao — body vazio (a e b ficam undefined → resultado null)
+POST {{baseUrl}}/adicao
+Content-Type: application/json
+
+{}
+
+### POST /adicao — valores como string (comportamento inesperado)
+POST {{baseUrl}}/adicao
+Content-Type: application/json
+
+{
+    "a": "abc",
+    "b": 3
+}
