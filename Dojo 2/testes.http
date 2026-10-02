@@ -59,11 +59,6 @@ Content-Type: application/json
     "b": 4
 }
 
-
-# ============================================================
-# CASOS DE TESTE (situações especiais / de erro)
-# ============================================================
-
 ### POST /divisao — divisão por zero (deve retornar a mensagem de erro)
 POST {{baseUrl}}/divisao
 Content-Type: application/json
@@ -71,37 +66,4 @@ Content-Type: application/json
 {
     "a": 10,
     "b": 0
-}
-
-### POST /adicao — números negativos — -5 + 3 = -2
-POST {{baseUrl}}/adicao
-Content-Type: application/json
-
-{
-    "a": -5,
-    "b": 3
-}
-
-### POST /adicao — números decimais — 1.5 + 2.5 = 4
-POST {{baseUrl}}/adicao
-Content-Type: application/json
-
-{
-    "a": 1.5,
-    "b": 2.5
-}
-
-### POST /adicao — body vazio (a e b ficam undefined → resultado null)
-POST {{baseUrl}}/adicao
-Content-Type: application/json
-
-{}
-
-### POST /adicao — valores como string (comportamento inesperado)
-POST {{baseUrl}}/adicao
-Content-Type: application/json
-
-{
-    "a": "abc",
-    "b": 3
 }
